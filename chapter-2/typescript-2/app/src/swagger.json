@@ -11,7 +11,7 @@
     "paths": {
         "/categories": {
             "post": {
-                "tags": ["Category"],
+                "tags": ["Categories"],
                 "summary": "Create Category",
                 "description": "Create a new category",
                 "requestBody": {
@@ -75,6 +75,72 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/categories/import":{
+            "post":{
+                "tags": ["Categories"],
+                "summary": "Upload a file with categories",
+                "description": "Upload a CSV file with categorie list",
+                "requestBody":{
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "file":{
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Created"
+                    }
+                }
+            }
+        },
+        "/specification":{
+            "post":{
+                "tags": ["Specifications"],
+                "summary": "Create a Especification",
+                "description": "Create a new Especification",
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Specification"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500":{
+                        "description": "Specification already Exist"
+                    }
+                }
+            }
+        }
+    },
+    "components":{
+        "schemas": {
+            "Specification":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string"
+                    },
+                    "description":{
+                        "type":"string"
                     }
                 }
             }
