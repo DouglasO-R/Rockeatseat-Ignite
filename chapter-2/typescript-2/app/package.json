@@ -10,6 +10,7 @@
     "@types/jest": "^27.4.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/multer": "1.4.7",
+    "@types/nodemailer": "6.4.4",
     "@types/swagger-ui-express": "^4.1.3",
     "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.16.0",
@@ -25,14 +26,20 @@
     "typescript": "4.6.2"
   },
   "dependencies": {
+    "@types/supertest": "2.0.12",
+    "aws-sdk": "2.1133.0",
     "bcrypt": "5.0.1",
     "csv-parse": "5.0.4",
+    "dayjs": "1.11.1",
     "express": "4.17.3",
     "express-async-errors": "3.1.1",
+    "handlebars": "4.7.7",
     "jsonwebtoken": "8.5.1",
     "multer": "^1.4.4",
+    "nodemailer": "6.7.5",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
+    "supertest": "6.2.3",
     "swagger-ui-express": "^4.3.0",
     "tsyringe": "4.6.0",
     "typeorm": "^0.3.5",
@@ -40,7 +47,9 @@
   },
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn server.ts",
-    "typeorm": "typeorm-ts-node-esm",
-    "test": "jest"
+    "typeormOld": "typeorm-ts-node-esm",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/.bin/typeorm ",
+    "seed:admin": "ts-node-dev src/shared/Infra/typeorm/seed/admin.ts",
+    "test": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles "
   }
 }

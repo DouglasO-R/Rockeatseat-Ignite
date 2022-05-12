@@ -2,14 +2,14 @@ import { inject, injectable } from "tsyringe";
 import {hash} from "bcrypt";
 import { ICreateUserDTO } from "@modules/Accounts/Users/Dto/ICreateUserDTO";
 import { IUserRepository } from "@modules/Accounts/Users/Repository/IUserRepository";
-import { AppError } from "@errors/AppError";
+import { AppError } from "@shared/errors/AppError";
 
 @injectable()
 export class CreateUserUseCase {
 
 
     constructor(
-        @inject("PostgresUserRepository")
+        @inject("OrmUserRepository")
         private userRepository:IUserRepository
     ){}
 

@@ -11,13 +11,20 @@
     "paths": {
         "/categories": {
             "post": {
-                "tags": ["Categories"],
+                "tags": [
+                    "Categories"
+                ],
                 "summary": "Create Category",
                 "description": "Create a new category",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "schema":{
+                            "schema": {
                                 "type": "object",
                                 "properties": {
                                     "name": {
@@ -36,38 +43,40 @@
                     }
                 },
                 "responses": {
-                    "201":{
+                    "201": {
                         "description": "Created"
                     },
-                    "500":{
+                    "500": {
                         "description": "Category Already Exists"
                     }
                 }
             },
-            "get":{
-                "tags": ["Categories"],
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
                 "summary": "List All Categories",
                 "description": "List All Categories",
                 "responses": {
-                    "200":{
+                    "200": {
                         "description": "Success",
                         "content": {
-                            "application/json":{
-                                "schema":{
+                            "application/json": {
+                                "schema": {
                                     "type": "array",
-                                    "items":{
+                                    "items": {
                                         "type": "object",
                                         "properties": {
-                                            "id":{
+                                            "id": {
                                                 "type": "string"
                                             },
-                                            "name":{
+                                            "name": {
                                                 "type": "string"
                                             },
-                                            "description":{
+                                            "description": {
                                                 "type": "string"
                                             },
-                                            "created_at":{
+                                            "created_at": {
                                                 "type": "string"
                                             }
                                         }
@@ -79,20 +88,189 @@
                 }
             }
         },
-        "/categories/import":{
-            "post":{
-                "tags": ["Categories"],
+        "/categories/import": {
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
                 "summary": "Upload a file with categories",
                 "description": "Upload a CSV file with categorie list",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        },
+        "/specification": {
+            "post": {
+                "tags": [
+                    "Specifications"
+                ],
+                "summary": "Create a Especification",
+                "description": "Create a new Especification",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Specification"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Specification already Exist"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Specifications"
+                ],
+                "summary": "List all especifications",
+                "description": "List all especifications",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Specification"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/auth": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Authentication user",
+                "description": "Authentication user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Email or Password incorrect !"
+                    }
+                }
+            }
+        },
+        "/cars": {
+            "post": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Create a new Car",
+                "description": "Create a new car",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Car"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Created"
+                    },
+                    "400":{
+                        "description": "Car Already Exist"
+                    }
+                }
+            }
+        },
+        "/cars/images/{id}":{
+            "post":{
+                "tags": ["Cars"],
+                "summary": "Uplaod car images",
+                "description": "Upload images",
+                "security": [
+                    {"bearerAuth":[] }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Car id",
+                        "required": true,
+                        "schema":{
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody":{
                     "content": {
                         "multipart/form-data":{
                             "schema":{
                                 "type": "object",
                                 "properties": {
-                                    "file":{
-                                        "type": "string",
-                                        "format": "binary"
+                                    "images":{
+                                        "type": "array",
+                                        "items":{
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
                                     }
                                 }
                             }
@@ -105,44 +283,53 @@
                     }
                 }
             }
-        },
-        "/specification":{
-            "post":{
-                "tags": ["Specifications"],
-                "summary": "Create a Especification",
-                "description": "Create a new Especification",
-                "requestBody":{
-                    "content": {
-                        "application/json":{
-                            "schema":{
-                                "$ref":"#/components/schemas/Specification"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created"
+        }
+    },
+    "components": {
+        "schemas": {
+            "Specification": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
                     },
-                    "500":{
-                        "description": "Specification already Exist"
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Car":{
+                "type": "object",
+                "properties": {
+                    "name":{
+                        "type": "string"
+                    },
+                    "description":{
+                        "type": "string"
+                    },
+                    "daily_rate":{
+                        "type": "number"
+                    },
+                    "license_plate":{
+                        "type": "string"
+                    },
+                    "fine_amount":{
+                        "type": "number"
+                    },
+                    "brand":{
+                        "type": "string"
+                    },
+                    "category_id":{
+                        "type": "string"
                     }
                 }
             }
-        }
-    },
-    "components":{
-        "schemas": {
-            "Specification":{
-                "type":"object",
-                "properties":{
-                    "name":{
-                        "type":"string"
-                    },
-                    "description":{
-                        "type":"string"
-                    }
-                }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }
