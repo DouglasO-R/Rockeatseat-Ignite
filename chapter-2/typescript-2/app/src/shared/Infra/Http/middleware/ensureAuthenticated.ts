@@ -18,7 +18,7 @@ export async function ensureAuthenticated(request: Request, response: Response, 
 
     }
 
-    const [, token] = authHeader.split(" ");
+    const [_, token] = authHeader.split(" ");
 
     try {
 

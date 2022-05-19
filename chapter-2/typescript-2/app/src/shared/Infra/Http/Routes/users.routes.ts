@@ -9,13 +9,14 @@ import { UpdateUserAvatarController } from "../../../../modules/Accounts/Users/C
 import { RefreshTokenController } from "@modules/Accounts/Users/Controller/RefreshTokenController";
 import { SendForgotPasswordMailController } from "@modules/Accounts/Users/Controller/SendForgotPasswordMailController";
 import { ResetPasswordController } from "@modules/Accounts/Users/Controller/ResetPasswordController";
+import { ProfileUserController } from "@modules/Accounts/Users/Controller/ProfileUserController";
 
 
 
 const routes = Router();
 const uploadAvatar = multer(uploadConfig);
 
-
+routes.get("/profile",ensureAuthenticated, ProfileUserController.handle);
 routes.post("/", CreateUserController.handle);
 routes.post("/forgot", SendForgotPasswordMailController.handle);
 routes.post("/reset", ResetPasswordController.handle);

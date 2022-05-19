@@ -1,6 +1,5 @@
 import { app } from "@shared/Infra/Http/App";
 import { appDatasource } from "@shared/Infra/typeorm";
-
 appDatasource.initialize().then((con) => console.log("connected")).catch((err) => console.log(err));
 
 // (async () => {

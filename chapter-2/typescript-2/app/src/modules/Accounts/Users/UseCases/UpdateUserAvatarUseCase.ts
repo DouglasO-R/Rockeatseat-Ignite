@@ -1,5 +1,4 @@
 import { inject, injectable } from "tsyringe";
-import { deletFile } from "@utils/file";
 import { IUserRepository } from "@modules/Accounts/Users/Repository/IUserRepository";
 import { IStorageProvider } from "@shared/container/providers/StorageProvider/IStorageProvider";
 
