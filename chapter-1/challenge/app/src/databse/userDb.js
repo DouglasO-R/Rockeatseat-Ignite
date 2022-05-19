@@ -1,4 +1,0 @@
-const users = [];
-
-
-export { users };
