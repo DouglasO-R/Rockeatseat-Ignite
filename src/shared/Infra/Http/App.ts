@@ -9,7 +9,7 @@ import swaggerUi from "swagger-ui-express";
 import { AppError } from "@shared/errors/AppError";
 
 
-import swaggerFile from "../../../swagger.json";
+import swaggerFile from "../../../docs/swagger.json";
 import { routes } from "./Routes";
 import upload from "@config/upload";
 
